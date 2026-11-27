@@ -1,20 +1,23 @@
 /* NestBudget — design system.
    Warm paper background, deep-green ink, amber highlights.
-   One stylesheet for every page; no frameworks, no webfonts. */
+   One stylesheet for every page; no frameworks, no webfonts.
+   Colours are oklch (wide-gamut, perceptually even steps);
+   cards are containers, so rows adapt to the card they are
+   in — not just to the window. */
 
 :root {
-  --paper: #faf6ef;
-  --card: #ffffff;
-  --ink: #1d2b23;
-  --ink-soft: #5a6a60;
-  --line: #e7dfd2;
-  --green: #17604a;
-  --green-deep: #0e4634;
-  --green-tint: #e3f0e8;
-  --amber: #e8a33d;
-  --amber-tint: #fbf0da;
-  --red: #c2452d;
-  --red-tint: #f9e4de;
+  --paper: oklch(0.975 0.014 84);
+  --card: oklch(1 0 0);
+  --ink: oklch(0.27 0.028 162);
+  --ink-soft: oklch(0.5 0.03 155);
+  --line: oklch(0.9 0.02 84);
+  --green: oklch(0.45 0.095 163);
+  --green-deep: oklch(0.35 0.08 163);
+  --green-tint: oklch(0.94 0.03 155);
+  --amber: oklch(0.76 0.135 74);
+  --amber-tint: oklch(0.96 0.035 84);
+  --red: oklch(0.53 0.16 32);
+  --red-tint: oklch(0.93 0.04 28);
   --radius: 18px;
   --shadow: 0 2px 10px rgba(29, 43, 35, 0.06), 0 12px 32px rgba(29, 43, 35, 0.05);
 }
@@ -105,15 +108,17 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 22px;
+  container-type: inline-size;
 }
 
 .card h2 {
   margin: 0 0 4px;
   font-size: 19px;
   letter-spacing: -0.2px;
+  text-wrap: balance;
 }
 
-.card .hint { color: var(--ink-soft); font-size: 14px; margin: 0 0 14px; }
+.card .hint { color: var(--ink-soft); font-size: 14px; margin: 0 0 14px; text-wrap: pretty; }
 
 .span-4 { grid-column: span 4; }
 .span-6 { grid-column: span 6; }
@@ -185,6 +190,13 @@ body {
 .bar-fill.over { background: var(--red); }
 
 .bar-row .amt { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* In a narrow card the bar drops to its own full-width row —
+   a container query, so it follows the card, not the window. */
+@container (max-width: 430px) {
+  .bar-row { grid-template-columns: 1fr auto; }
+  .bar-row .bar-track { grid-column: 1 / -1; grid-row: 2; }
+}
 
 .split-bar {
   display: flex;
@@ -260,6 +272,53 @@ input:focus, select:focus {
   outline: 2px solid var(--green);
   outline-offset: 1px;
   border-color: var(--green);
+}
+
+/* Native validation, styled only after the visitor has
+   interacted — no red borders on a fresh form. */
+input:user-invalid, select:user-invalid {
+  border-color: var(--red);
+  background: var(--red-tint);
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ---------- dialog (native, no library) ---------- */
+
+dialog.added {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  max-width: min(420px, 90vw);
+  color: var(--ink);
+  background: var(--card);
+}
+
+dialog.added::backdrop { background: rgba(14, 40, 30, 0.45); }
+dialog.added h3 { margin: 0 0 6px; font-size: 19px; text-wrap: balance; }
+dialog.added p { margin: 0 0 14px; color: var(--ink-soft); }
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  background: var(--green-deep);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 12px 12px;
+  z-index: 10;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus { top: 0; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .skip-link { transition: none; }
 }
 
 button.primary {

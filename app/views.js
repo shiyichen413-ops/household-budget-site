@@ -111,8 +111,14 @@ export const expensesPage = {
           <p><label class="field" for="tx-category">Category</label>
           <select id="tx-category">${options}</select></p>
           <p><button class="primary" type="submit">Add to the ledger</button></p>
-          <p class="hint" id="tx-done" role="status"></p>
         </form>
+        <dialog class="added" id="tx-dialog" aria-labelledby="tx-dialog-title">
+          <h3 id="tx-dialog-title">Added to the ledger</h3>
+          <p id="tx-dialog-body"></p>
+          <form method="dialog">
+            <button class="primary" type="submit">Done</button>
+          </form>
+        </dialog>
       </section>
     </div>`;
   },
@@ -131,8 +137,16 @@ export const expensesPage = {
       if (!label || !(amount > 0)) return;
       TRANSACTIONS.push({ day: "Nov 27", label, category, amount: -amount });
       body.innerHTML = txRows(filter.value);
-      view.querySelector("#tx-done").textContent =
-        `Added ${money(-amount)} for “${label}”. Head back to the overview to see the new totals.`;
+      const cat = categoryById(category);
+      const now = state();
+      const spentNow = now.spent.get(category) || 0;
+      const verdict =
+        spentNow > cat.budget
+          ? `That takes ${cat.label} to ${money(spentNow)} — ${money(spentNow - cat.budget)} over its ${money(cat.budget)} budget.`
+          : `${cat.label} now stands at ${money(spentNow)} of ${money(cat.budget)} — ${money(cat.budget - spentNow)} still in hand.`;
+      view.querySelector("#tx-dialog-body").textContent =
+        `${money(amount)} for “${label}”. ${verdict}`;
+      view.querySelector("#tx-dialog").showModal();
       event.target.reset();
     });
   },

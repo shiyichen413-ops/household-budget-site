@@ -121,7 +121,10 @@ function draw() {
   view.innerHTML = ROUTES[name].render();
   if (ROUTES[name].bind) ROUTES[name].bind(view);
   for (const a of document.querySelectorAll("#mainnav a")) {
-    a.classList.toggle("active", a.dataset.route === name);
+    const on = a.dataset.route === name;
+    a.classList.toggle("active", on);
+    if (on) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
   }
 }
 

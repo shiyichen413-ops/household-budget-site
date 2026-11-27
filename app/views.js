@@ -53,8 +53,8 @@ export function budgetPage() {
       </p>
     </section>
     <section class="card span-12 notice">
-      <b>Try it:</b> the plan above is the household's real November plan. The one number to watch is
-      Groceries — $785 of $820 spent with a week still to go.
+      <b>Watch-out:</b> Groceries has just tipped over its line — $830.25 spent of $820 planned, with a week
+      still to go. By the house rule, the difference comes out of “Fun &amp; streaming”, never out of savings.
     </section>
   </div>`;
 }

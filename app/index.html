@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NestBudget — the Miller household budget</title>
+<meta name="description" content="NestBudget: one calm page for a household's money — income, budgets, spending and savings goals, all in agreement.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark"><span class="nest">Nest</span>Budget</div>
+      <div class="brand-sub">The Miller household · November 2026 · every figure agrees, on every page</div>
+    </div>
+    <nav class="mainnav" id="mainnav">
+      <a href="#/" data-route="dashboard">Overview</a>
+      <a href="#/budget" data-route="budget">Budget planner</a>
+      <a href="#/expenses" data-route="expenses">Expenses</a>
+      <a href="#/goals" data-route="goals">Savings goals</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page" id="view">
+  <!-- Each route renders here. See main.js for the router and
+       views.js for what each page draws. -->
+</main>
+
+<footer class="footer">
+  <span>NestBudget — a household budget that fits on one calm page.</span>
+  <span>Sample household data, stored only in this page. No accounts, no tracking.</span>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

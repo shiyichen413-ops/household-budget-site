@@ -48,8 +48,9 @@ export function budgetPage() {
       <div class="bar-row"><span class="cat"><span class="dot wants"></span>Wants</span><span></span><span class="amt">${share(kindTotals.want)}% <span class="hint">of 30%</span></span></div>
       <div class="bar-row"><span class="cat"><span class="dot saves"></span>Savings</span><span></span><span class="amt">${share(kindTotals.savings)}% <span class="hint">of 20%</span></span></div>
       <p class="hint" style="margin-top:12px">
-        Verdict: needs run a little hot because of the mortgage, wants are well inside,
-        and savings clear the bar — a healthy shape for a family of four.
+        Verdict: needs sit comfortably inside their half and wants are frugal — the honest
+        gap is savings at 11% against a 20% guide, which is why the plan pays the savings
+        pot first, before anything else, every month.
       </p>
     </section>
     <section class="card span-12 notice">

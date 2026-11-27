@@ -96,7 +96,7 @@ function overviewPage() {
 
     <section class="card span-12 notice">
       <b>House rule:</b> if a category runs over, the money comes out of “Fun &amp; streaming” first —
-      never out of savings. This month that rule has not been needed yet.
+      never out of savings. Groceries has just dipped $10.25 over its line, so that rule is already at work this month.
     </section>
   </div>`;
 }
